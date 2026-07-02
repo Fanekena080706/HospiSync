@@ -1,1 +1,0 @@
-/* initial fotsiny ty fa afaka manampy pages */
