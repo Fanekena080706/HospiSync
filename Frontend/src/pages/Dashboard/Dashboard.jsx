@@ -1,12 +1,15 @@
-import React from 'react';
+import Layout from "../../components/layout/Layout";
 
 function Dashboard() {
   return (
-    <main>
-      <h1>Dashboard</h1>
-      <p>Bienvenue sur le tableau de bord.</p>
-    </main>
-  );
+    	<Layout>
+      		<h1>Tableau de bord</h1>
+      		<div className="stats">
+        		<div className="stat-card">Patients aujourd'hui : 12</div>
+        		<div className="stat-card">Rendez-vous : 5</div>
+      		</div>
+    	</Layout>
+  	);
 }
 
 export default Dashboard;
