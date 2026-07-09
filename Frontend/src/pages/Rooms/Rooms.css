@@ -1,0 +1,115 @@
+/* Rooms.css */
+.rooms-page {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.rooms-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.rooms-header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.add-room-btn {
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-room-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* --- Tableau --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #9ca3af;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody td {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- Barre d'occupation --- */
+.occupation-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.occupation-bar {
+  width: 90px;
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.occupation-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.occupation-fill.low {
+  background-color: #16a34a; /* vert */
+}
+
+.occupation-fill.full {
+  background-color: #dc2626; /* rouge */
+}
+
+/* --- Boutons d'action --- */
+.actions-cell {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 0.4rem;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+}
+
+.action-btn.edit {
+  background-color: #3b82f6;
+}
+
+.action-btn.delete {
+  background-color: #ef4444;
+}

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login/Login.jsx";
-import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Rooms from "./pages/Rooms/Rooms";
 import "./App.css";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/rooms" element={<Rooms />} />
       </Routes>
     </BrowserRouter>
   );
