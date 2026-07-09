@@ -1,0 +1,16 @@
+.stat-card{
+    background-color: white;
+    flex : 1 1 220px;
+}
+
+.stat-name{
+    color :rgb(62, 60, 60);
+}
+
+.stats{
+    display : flex;
+    flex-direction : row;
+    gap : 20px;
+    flex-wrap : wrap;
+    align-items : center;
+}
