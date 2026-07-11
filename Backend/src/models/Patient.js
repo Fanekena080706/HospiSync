@@ -4,47 +4,53 @@ const patientSchema = new mongoose.Schema(
 {
     nom: {
         type: String,
-        required: true,
+        required: [true, "le nom est requis"],
         trim: true
     },
 
     prenom: {
         type: String,
-        required: true,
+        required: [true, "le prenom est requis"],
         trim: true
+    },
+
+    age: {
+        type: Number,
+        required: [true, "l'âge est requis"],
+        min: [0, "l'âge ne peut pas être négatif"]
     },
 
     sexe: {
         type: String,
         enum: ["Masculin", "Féminin"],
-        required: true
+        required: [true, "le sexe est requis"]
     },
 
     date_naissance: {
         type: Date,
-        required: true
+        default: null
     },
 
     adresse: {
         type: String,
-        required: true
+        default: ""
     },
 
     telephone: {
         type: String,
-        required: true
+        default: ""
     },
 
     groupe_sanguin: {
         type: String,
-        required: true
+        default: ""
     },
 
     niveau_urgence: {
         type: Number,
         min: 1,
         max: 5,
-        required: true
+        required: [true, "le niveau d'urgence est requis"]
     },
 
     informations_medicales: {

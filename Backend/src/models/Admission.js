@@ -28,7 +28,7 @@ const admissionSchema = new mongoose.Schema(
         required: true
     },
 
-    statut: {
+    status: {
         type: String,
         enum: ["Hospitalisé", "Sorti", "Transféré"],
         default: "Hospitalisé"

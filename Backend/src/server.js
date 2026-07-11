@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connexionDB from "./config/database.js";
 
+import patientRoutes from "./routes/patient.Routes.js"
+import admissionRoutes from "./routes/admission.Routes.js"
+import salleRoutes from "./routes/salle.Routes.js"
 import medicamentRoutes from "./routes/medicament.Routes.js";
 import mouvementStockRoutes from "./routes/mouvementStock.Routes.js";
 import utilisateurRoutes from "./routes/utilisateur.Routes.js"
@@ -28,9 +31,9 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-// app.use("/api/patients", patientRoutes);
-// app.use("/api/salles", salleRoutes);
-// app.use("/api/admissions", admissionRoutes);
+app.use("/api/patients", patientRoutes);
+app.use("/api/salles", salleRoutes);
+app.use("/api/admissions", admissionRoutes);
 app.use("/api/medicaments", medicamentRoutes);
 app.use("/api/mouvements", mouvementStockRoutes);
 app.use("/api/utilisateurs", utilisateurRoutes);

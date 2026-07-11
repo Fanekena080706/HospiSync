@@ -4,31 +4,30 @@ const salleSchema = new mongoose.Schema(
 {
     numero: {
         type: String,
-        required: true,
+        required:[true, "le numéro est requis"],
         unique: true
     },
 
     nom: {
         type: String,
-        required: true
+        required: [true, "le nom est requis"],
     },
 
     service: {
-        type: String,
-        required: true
+        type: String
     },
 
     capacite: {
         type: Number,
-        required: true
+        required: [true, "la capacité est requise"]
     },
 
     lits_disponibles: {
         type: Number,
-        required: true
+        required: [true, "le nombre de lits disponibles est requis"]
     },
 
-    statut: {
+    status: {
         type: String,
         enum: ["Disponible", "Complète", "Maintenance"],
         default: "Disponible"
