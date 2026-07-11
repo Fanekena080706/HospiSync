@@ -9,6 +9,7 @@ function Rooms() {
   const [rooms, setRooms] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   useEffect(() => {
     getRooms().then((data) => {
@@ -40,17 +41,34 @@ function Rooms() {
             <th>Nom</th>
             <th>Service</th>
             <th>Capacité</th>
+            <th>Places libres</th>
+            <th>Occupation</th>
           </tr>
         </thead>
         <tbody>
-          {rooms.map((room, index) => (
-            <tr key={room.id ?? index}>
-              <td>{room.id}</td>
-              <td>{room.nom}</td>
-              <td>{room.service}</td>
-              <td>{room.capacite}</td>
-            </tr>
-          ))}
+          {rooms.map((room, index) => {
+            
+            const occupancyClass = 
+              room.occupation >= 80 ? 'occupation-haut' :
+              room.occupation >= 50 ? 'occupation-medium' :
+              'occupation-bas';
+            
+            return (
+              <tr key={room.id ?? index}>
+                <td>{room.id}</td>
+                <td>{room.nom}</td>
+                <td>{room.service}</td>
+                <td>{room.capacite}</td>
+                <td>{room.placesLibres}</td>
+               
+                <td>
+                  <span className={`occupation ${occupancyClass}`}>
+                    {room.occupation.toFixed(1)}%
+                  </span>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
