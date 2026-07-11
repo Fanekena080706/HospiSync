@@ -113,3 +113,25 @@ tbody tr:last-child td {
 .action-btn.delete {
   background-color: #ef4444;
 }
+
+.occupation {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.occupation-bas {
+  background-color: #d4edda;  
+  color: #155724;
+}
+
+.occupation-medium {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.occupation-haut {
+  background-color: #f8d7da; 
+  color: #ff0019;
+}
