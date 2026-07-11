@@ -3,6 +3,10 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connexionDB from "./config/database.js";
 
+import medicamentRoutes from "./routes/medicament.Routes.js";
+import mouvementStockRoutes from "./routes/mouvementStock.Routes.js";
+import utilisateurRoutes from "./routes/utilisateur.Routes.js"
+
 dotenv.config();
 
 // Connexion à MongoDB
@@ -27,7 +31,9 @@ app.get("/", (req, res) => {
 // app.use("/api/patients", patientRoutes);
 // app.use("/api/salles", salleRoutes);
 // app.use("/api/admissions", admissionRoutes);
-// app.use("/api/medicaments", medicamentRoutes);
+app.use("/api/medicaments", medicamentRoutes);
+app.use("/api/mouvements", mouvementStockRoutes);
+app.use("/api/utilisateurs", utilisateurRoutes);
 
 const PORT = process.env.PORT || 5000;
 
