@@ -1,0 +1,69 @@
+
+.Header-Patients{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Button-AddPatient{
+    border: none;
+    outline: none;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.Container-SearchPatient{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px 0;
+
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+thead th {
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #9ca3af;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+tbody td {
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #374151;
+    border-bottom: 1px solid #f3f4f6;
+}
+.Container-SearchPatient input{
+    border: none;
+    outline: none;
+    padding: 1rem 0;
+    font-weight: bold;
+}
+.Button-Container{
+    display: flex;
+    flex-direction: row;
+}
+.Button-Delete{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.Button-Edit{
+    background-color: transparent;
+    border: none;
+    padding: 2px;
+    margin: 0 10px;
+    cursor: pointer;
+}

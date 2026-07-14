@@ -1,16 +1,166 @@
-.stat-card{
-    background-color: white;
-    flex : 1 1 220px;
+:root {
+    --color-main: #396aff;
+    --bg: #fbfefd;
+    --bg2:#dce5ff;
+    --main-accent: #e9eefd;
+    --main-text: #4b5876;
+    --shadow: rgba(17, 17, 26, 0.1) 2px 2px 16px;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('./assets/font/Poppins/Poppins-Regular.ttf') format('truetype');
+}
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--bg);
+    overflow-x: hidden;
+}
+main {
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+}
+.main-content {
+    width: calc(100vw - 345px);
+    padding-right: 2rem;
+    
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -15px;
+}
+.header-title h1 {
+    color: var(--main-text);
+    font-weight: 600;
 }
 
-.stat-name{
-    color :rgb(62, 60, 60);
+.header-title p{
+    color: #666;
+    font-size: .9rem;
 }
 
-.stats{
-    display : flex;
-    flex-direction : row;
-    gap : 20px;
-    flex-wrap : wrap;
-    align-items : center;
+.graph-title {
+    color: var(--main-text);
+    font-size: 15px;
+}
+
+.header-title p span {
+    color: #666;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-left: .5rem;
+}
+
+.section-head {
+    font-size: 1.4rem;
+    color: var(--main-text);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.analytics {
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    grid-gap: 2.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.analytic {
+    box-shadow: var(--shadow);
+    padding: 1.2rem;
+    border-radius: 10px;
+    display: flex;
+    padding-left: 2rem;
+    max-width: 300px;
+}
+
+
+.analytic-info h4 {
+    font-weight: 400;
+    color: #555;
+    font-size: .9rem;
+}
+
+.analytic-info h1 {
+    color: var(--main-text);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+.analytic:first-child .analytic-icon {
+    background: var(--bg2);
+    color: #6883db;
+}
+
+.analytic:nth-child(2) .analytic-icon {
+    background: rgba(0 , 255 , 0, 0.1);
+    color: #2ec3a3;
+}
+
+.analytic:nth-child(3) .analytic-icon {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+}
+
+.analytic:nth-child(4) .analytic-icon {
+    background: rgba(255, 0, 0, 0.1);
+    color: red;
+}
+
+.analytic-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin-right: .5rem;
+}
+
+.analytic-icon span {
+    transform: scale(1.5);
+}
+
+.Graphs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+}
+.Graph1 {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 465px;
+    border-radius: 10px;
+    height: 280px;
+    box-shadow: var(--shadow);
+}
+
+.alertes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 1rem;
+}
+
+.alerte {
+    flex: 0 0 calc(25% - 9px);
+    display: flex;
+    border-radius: 10px;
+    padding: 7px;
+    width: 300px;
+    background: rgba(255, 0, 0, 0.1);
+}
+.alerte span {
+    font-size: 30px;
+    color: red;
+    margin: 10px;
 }
