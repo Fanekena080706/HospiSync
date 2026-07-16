@@ -1,6 +1,6 @@
-/* Rooms.css - Version moderne et élégante */
+/* Mouvement.css - Version moderne et élégante */
 
-.rooms-page {
+.mouvement-page {
   background: #ffffff;
   border-radius: 1.5rem;
   padding: 2rem 2rem 2.5rem;
@@ -20,7 +20,7 @@
 }
 
 /* --- En-tête --- */
-.rooms-header {
+.mouvement-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,13 +29,13 @@
   gap: 1rem;
 }
 
-.rooms-header-left {
+.mouvement-header-left {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.rooms-header-left h1 {
+.mouvement-header-left h1 {
   font-size: 1.6rem;
   font-weight: 800;
   color: #1f2937;
@@ -43,7 +43,7 @@
   margin: 0;
 }
 
-.rooms-header-left .room-count {
+.mouvement-header-left .mouvement-count {
   background: #f3f4f6;
   color: #6b7280;
   font-size: 0.75rem;
@@ -52,7 +52,7 @@
   border-radius: 1rem;
 }
 
-.rooms-header-actions {
+.mouvement-header-actions {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -97,7 +97,7 @@
 }
 
 /* --- Bouton Ajouter --- */
-.add-room-btn {
+.add-mouvement-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
   border: none;
@@ -114,12 +114,12 @@
   white-space: nowrap;
 }
 
-.add-room-btn:hover {
+.add-mouvement-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-.add-room-btn:active {
+.add-mouvement-btn:active {
   transform: translateY(0);
 }
 
@@ -184,7 +184,7 @@ thead th {
 }
 
 thead th:last-child {
-  text-align: center;
+  text-align: left;
 }
 
 tbody tr {
@@ -206,8 +206,8 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* --- Status badge --- */
-.status-badge {
+/* --- Badges de type --- */
+.type-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -215,127 +215,106 @@ tbody tr:last-child td {
   border-radius: 2rem;
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: capitalize;
 }
 
-.status-badge .status-dot {
-  width: 6px;
-  height: 6px;
+.type-badge .type-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   display: inline-block;
 }
 
-.status-badge.disponible {
-  background: #ecfdf5;
+.type-badge.entree {
+  background: #d1fae5;
   color: #065f46;
 }
-
-.status-badge.disponible .status-dot {
+.type-badge.entree .type-dot {
   background: #10b981;
 }
 
-.status-badge.complète {
+.type-badge.sortie {
   background: #fef2f2;
   color: #991b1b;
 }
-
-.status-badge.complète .status-dot {
+.type-badge.sortie .type-dot {
   background: #ef4444;
 }
 
-.status-badge.maintenance {
-  background: #fffbeb;
-  color: #92400e;
+/* --- Info médicament --- */
+.med-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.status-badge.maintenance .status-dot {
-  background: #f59e0b;
-}
-
-.status-badge.occupée {
-  background: #fef3c7;
-  color: #78350f;
-}
-
-.status-badge.occupée .status-dot {
-  background: #d97706;
-}
-
-/* --- Actions --- */
-.actions-cell {
+.med-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  color: white;
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 0.8rem;
 }
 
-.action-btn-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 0.6rem;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: transparent;
-  color: #6b7280;
+.med-icon.entree {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
 
-.action-btn-icon:hover {
-  background: #f3f4f6;
-  transform: scale(1.05);
+.med-icon.sortie {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
 }
 
-.action-btn-icon.edit:hover {
-  background: #dbeafe;
-  color: #2563eb;
+.med-name {
+  font-weight: 600;
+  color: #1f2937;
 }
 
-.action-btn-icon.delete:hover {
-  background: #fef2f2;
+/* --- Quantité --- */
+.quantity-display {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.quantity-display.entree {
+  color: #10b981;
+}
+
+.quantity-display.sortie {
   color: #ef4444;
 }
 
-/* --- Indicateur de capacité --- */
-.capacity-indicator {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
+/* --- Date et heure --- */
+.datetime-info {
+  font-size: 0.85rem;
 }
 
-.capacity-bar {
-  width: 80px;
-  height: 6px;
-  background: #e5e7eb;
-  border-radius: 999px;
-  overflow: hidden;
+.datetime-info .date {
+  font-weight: 500;
+  color: #1f2937;
 }
 
-.capacity-fill {
-  height: 100%;
-  border-radius: 999px;
-  transition: width 0.6s ease;
+.datetime-info .time {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  display: block;
 }
 
-.capacity-fill.low {
-  background: linear-gradient(90deg, #10b981, #34d399);
-}
-
-.capacity-fill.medium {
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
-}
-
-.capacity-fill.high {
-  background: linear-gradient(90deg, #ef4444, #f87171);
-}
-
-.capacity-text {
-  font-size: 0.8rem;
-  font-weight: 600;
+/* --- Observation --- */
+.observation-text {
+  font-size: 0.85rem;
   color: #6b7280;
-  min-width: 40px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.observation-text.has-value {
+  color: #1f2937;
 }
 
 /* --- État vide --- */
@@ -361,17 +340,17 @@ tbody tr:last-child td {
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-  .rooms-page {
+  .mouvement-page {
     padding: 1rem;
     border-radius: 1rem;
   }
 
-  .rooms-header {
+  .mouvement-header {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .rooms-header-actions {
+  .mouvement-header-actions {
     flex-direction: column;
   }
 
@@ -380,7 +359,7 @@ tbody tr:last-child td {
     width: 100%;
   }
 
-  .add-room-btn {
+  .add-mouvement-btn {
     width: 100%;
     justify-content: center;
   }
@@ -389,7 +368,15 @@ tbody tr:last-child td {
     justify-content: center;
   }
 
-  .rooms-header-left h1 {
+  .mouvement-header-left h1 {
     font-size: 1.3rem;
+  }
+
+  /* Masquer certaines colonnes sur mobile */
+  thead th:nth-child(4),
+  thead th:nth-child(6),
+  tbody td:nth-child(4),
+  tbody td:nth-child(6) {
+    display: none;
   }
 }

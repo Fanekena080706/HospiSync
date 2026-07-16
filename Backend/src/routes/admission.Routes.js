@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.post("/",admissionController.createAdmission);
 router.get("/",admissionController.getAllAdmission);
+router.get("/semaine",admissionController.getAdmissionsCurrentWeek);
 router.get("/:id",admissionController.getAdmissionById);
 router.put("/:id",admissionController.updateAdmission);
 router.delete("/:id",admissionController.deleteAdmission);

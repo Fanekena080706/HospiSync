@@ -1,97 +1,98 @@
 // AddRoomModal.jsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./AddRoomModal.css";
+import { IdCard } from "lucide-react";
+import { salleService } from "../../services/salle.Service";
 
-function AddRoomModal({ onClose, onRoomAdded, onRoomUpdated, roomToEdit }) {
-  const [id, setId] = useState("");
-  const [nom, setNom] = useState("");
-  const [service, setService] = useState("");
-  const [capacite, setCapacite] = useState("");
-  const [placesLibres, setPlacesLibres] = useState("");
-  const [error, setError] = useState("");
+function AddRoomModal({room, onClose, onSuccess }) {
+  const [numero, setNumero] = useState(room?.numero || "");
+  const [nom, setNom] = useState(room?.nom || "");
+  const [service, setService] = useState(room?.service || "");
+  const [capacite, setCapacite] = useState(room?.capacite || 0);
+  const [placesLibres, setPlacesLibres] = useState(room?.lits_disponibles || 0);
+  const [error , setError] = useState("");
 
-  // Affichage du form quand edition d'une salle
-  useEffect(() => {
-    if (roomToEdit) {
-      setId(roomToEdit.id);
-      setNom(roomToEdit.nom);
-      setService(roomToEdit.service);
-      setCapacite(roomToEdit.capacite.toString());
-      setPlacesLibres(roomToEdit.placesLibres.toString());
-    }
-  }, [roomToEdit]);
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const capaciteNum = Number(capacite);
-    const placesLibresNum = Number(placesLibres);
-
-    // validation
-    if (capaciteNum <= 0 || placesLibresNum < 0 || placesLibresNum > capaciteNum) {
-      setError(
-        "La capacité et les places libres doivent être des nombres positifs, et les places libres ne peuvent pas dépasser la capacité."
-      );
+    let status = room?.status || "Disponible";
+    if (Number(placesLibres)> Number(capacite)) {
+      setError("Le nombre de places libres ne peut pas dépasser la capacité de la salle.");
       return;
-    }
-
-    setError("");
-
-    // calcul du pourcentage d'occupation
-    const occupation =
-      capaciteNum > 0 ? ((capaciteNum - placesLibresNum) / capaciteNum) * 100 : 0;
-    const occupationArrondie = Math.round(occupation * 10) / 10; // arrondi à 1 décimale
-
-    if (roomToEdit) {
-      const updatedRoom = {
-        id: roomToEdit.id,
-        nom,
-        service,
-        capacite: capaciteNum,
-        placesLibres: placesLibresNum,
-        occupation: occupationArrondie,
-      };
-      onRoomUpdated(updatedRoom);
-      onClose();
+    }else if (Number(placesLibres) < 0) {
+      setError("Le nombre de places libres ne peut pas être négatif.");
       return;
+    }else if (Number(capacite) < 0) {
+      setError("La capacité de la salle ne peut pas être négative.");
+      return;
+    }else if (Number(placesLibres) ===0) {
+      status = "Complète";
+    }else if (Number(placesLibres) === Number(capacite) || Number(placesLibres) > 0) {
+      status = "Disponible";
     }
-
-    const newRoom = {
-      id,
-      nom,
-      service,
-      capacite: capaciteNum,
-      placesLibres: placesLibresNum,
-      occupation: occupationArrondie,
+    const roomData = {
+      numero: numero,
+      nom:  nom,
+      service: service,
+      capacite: Number(capacite),
+      lits_disponibles: Number(placesLibres),
+      status: status
     };
-    onRoomAdded(newRoom); // on remonte la nouvelle salle au parent
-    onClose(); // on ferme la modale
+    if(room){
+      try{
+        
+        const response = await salleService.update(room._id, roomData);
+        onSuccess(response.data.data);
+        onClose();
+      }catch(err){
+        setError(err.response?.data?.message || "Une erreur est survenue lors de la modification de la salle.");
+      }
+    }else{
+      try{
+        const response = await salleService.create(roomData);
+        onSuccess(response.data.data);
+        onClose();
+      }catch(err){
+        setError(err.response?.data?.message || "Une erreur est survenue lors de l'ajout de la salle.");
+      }
+    }
   }
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h2>{roomToEdit ? "Modifier une salle" : "Ajouter une salle"}</h2>
+        <h2>{room ? "Modifier une salle" : "Ajouter une salle"}</h2>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p style = {{ color: "red" }}>{error}</p>}
 
         <form onSubmit={handleSubmit}>
+
           <label>Numéro</label>
           <input
-            value={id}
-            onChange={(e) => setId(e.target.value)}
+            placeholder={room?.numero || "Numéro de la salle"}
+            value={numero}
+            onChange={(e) => setNumero(e.target.value)}
             required
-            disabled={!!roomToEdit} // l'id ne doit pas changer en édition
+          />
+          <label>Nom</label>
+          <input
+            placeholder={room?.nom || "Nom de la salle"}
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
+            required
           />
 
-          <label>Nom</label>
-          <input value={nom} onChange={(e) => setNom(e.target.value)} required />
-
           <label>Service</label>
-          <input value={service} onChange={(e) => setService(e.target.value)} required />
+          <input
+            placeholder={room?.service || "Service de la salle"}
+            value={service}
+            onChange={(e) => setService(e.target.value)}
+            required
+          />
 
           <label>Capacité</label>
           <input
+            placeholder={room?.capacite || "Capacité de la salle"}
             type="number"
             value={capacite}
             onChange={(e) => setCapacite(e.target.value)}
@@ -100,6 +101,7 @@ function AddRoomModal({ onClose, onRoomAdded, onRoomUpdated, roomToEdit }) {
 
           <label>Places libres</label>
           <input
+            placeholder={room?.lits_disponibles || "Places libres"}
             type="number"
             value={placesLibres}
             onChange={(e) => setPlacesLibres(e.target.value)}
@@ -107,10 +109,8 @@ function AddRoomModal({ onClose, onRoomAdded, onRoomUpdated, roomToEdit }) {
           />
 
           <div className="modal-actions">
-            <button type="button" onClick={onClose}>
-              Annuler
-            </button>
-            <button type="submit">{roomToEdit ? "Modifier" : "Ajouter"}</button>
+            <button type="button" onClick={onClose}>Annuler</button>
+            <button type="submit">{room ? "Modifier" : "Ajouter"}</button>
           </div>
         </form>
       </div>

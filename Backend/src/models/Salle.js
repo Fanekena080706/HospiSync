@@ -29,7 +29,7 @@ const salleSchema = new mongoose.Schema(
 
     status: {
         type: String,
-        enum: ["Disponible", "Complète", "Maintenance"],
+        enum: ["Disponible", "Complète", "Maintenance","Occupée"],
         default: "Disponible"
     }
 

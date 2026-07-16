@@ -1,17 +1,21 @@
-.app-container{
+.app-container {
     display: flex;
     min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.main-content{
+.main-content {
     flex: 1;
     display: flex;
-    flex-direction: column; /*navbar en haut, conten en bas*/
+    flex-direction: column;
+    background: #f8f9fc;
+    border-radius: 0;
+    margin: 0;
 }
 
-.page-content{
+.page-content {
     flex: 1;
     padding: 2rem;
-    background-color: #f3f5f9;
-
+    background: #f8f9fc;
+    overflow-y: auto;
 }

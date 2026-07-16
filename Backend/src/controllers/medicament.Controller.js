@@ -1,4 +1,5 @@
 import Medicament from '../models/Medicament.js';
+import MouvementStock from '../models/MouvementStock.js'
 
 
 // Tous les médicaments
@@ -54,6 +55,10 @@ export const updateMedicament = async (req, res) => {
 // Supprimer
 export const deleteMedicament = async (req, res) => {
     try{
+        const mouvement = await MouvementStock.findOne({medicament:req.params.id})
+        if(mouvement){
+            return res.status(409).json({message: 'Impossible de supprimer ce médicament. Des mouvements de stock existent.'})
+        }
         const medicament = await Medicament.findByIdAndDelete(req.params.id);
         if(!medicament){
             return res.status(404).json({message: 'Médicament non trouvé'});

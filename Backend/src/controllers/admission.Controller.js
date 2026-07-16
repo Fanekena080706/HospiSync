@@ -169,6 +169,82 @@ class AdmissionController {
       res.status(500).json({ success: false, error: error.message });
     }
   }
+
+  static getCurrentWeekRange() {
+      const now = new Date();
+  
+      const day = now.getDay();
+  
+      // Lundi de la semaine courante
+      const startOfWeek = new Date(now);
+      startOfWeek.setDate(now.getDate() - (day === 0 ? 6 : day - 1));
+      startOfWeek.setHours(0, 0, 0, 0);
+  
+      // Dimanche de la semaine courante
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6);
+      endOfWeek.setHours(23, 59, 59, 999);
+  
+      return { startOfWeek, endOfWeek };
+    }
+    async getAdmissionsCurrentWeek(req, res) {
+      try {
+        const { startOfWeek } = AdmissionController.getCurrentWeekRange();
+  
+        // 1. Générer les 7 jours de la semaine
+        const weekDates = [];
+        for (let i = 0; i < 7; i++) {
+          const date = new Date(startOfWeek);
+          date.setDate(startOfWeek.getDate() + i);
+  
+          weekDates.push({
+            date: date.toISOString().split("T")[0], // "2026-07-14"
+            jour: date.toLocaleString("fr-FR", { weekday: "long" }), // "lundi"
+            nombre_admissions: 0,
+          });
+        }
+  
+        const admissions = await Admission.aggregate([
+          {
+            $match: {
+              date_admission: {
+                $gte: startOfWeek,
+                $lte: new Date(startOfWeek.getTime() + 7 * 24 * 60 * 60 * 1000),
+              },
+            },
+          },
+          {
+            $group: {
+              _id: {
+                $dateToString: { format: "%Y-%m-%d", date: "$date_admission" },
+              },
+              nombre_admissions: { $sum: 1 },
+            },
+          },
+        ]);
+  
+        admissions.forEach((item) => {
+          const found = weekDates.find((day) => day.date === item._id);
+          if (found) {
+            found.nombre_admissions = item.nombre_admissions;
+          }
+        });
+  
+        res.status(200).json({
+          periode: "Semaine courante",
+          debut_semaine: weekDates[0].date,
+          fin_semaine: weekDates[6].date,
+          total_admissions: weekDates.reduce(
+            (sum, day) => sum + day.nombre_admissions,
+            0,
+          ),
+          jours: weekDates,
+        });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erreur serveur" });
+      }
+    }
 }
 
 export default new AdmissionController();

@@ -1,4 +1,5 @@
 import Salle from "../models/Salle.js";
+import Admission from "../models/Admission.js";
 
 class SalleController {
   // salle all
@@ -67,6 +68,10 @@ class SalleController {
   //supprimer salle
   async deleteSalle(req, res) {
     try {
+      const admission = await Admission.findOne({patient:req.params.id})
+      if(admission){
+        return res.status(409).json({message:'Impossible de supprimer la salle. Admission existent'})
+      }
       const salle = await Salle.findByIdAndDelete(req.params.id);
       if (!salle) {
         return res

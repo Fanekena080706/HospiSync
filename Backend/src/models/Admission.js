@@ -25,7 +25,6 @@ const admissionSchema = new mongoose.Schema(
 
     motif: {
         type: String,
-        required: true
     },
 
     status: {

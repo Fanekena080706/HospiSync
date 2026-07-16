@@ -22,7 +22,6 @@ const medicamentSchema = new mongoose.Schema(
         },
         unite:{
             type: String,
-            required: true,
         }
     },
 {

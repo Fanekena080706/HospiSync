@@ -1,4 +1,5 @@
 import Patient from "../models/Patient.js";
+import Admission from "../models/Admission.js";
 
 class PatientController {
   async getAllPatient(req, res) {
@@ -57,6 +58,10 @@ class PatientController {
   
   async deletePatient(req, res) {
     try {
+      const admission = await Admission.findOne({patient:req.params.id})
+      if(admission){
+        return res.status(409).json({message:'Impossible de supprimer le patient. Admission existent'})
+      }
       const patient = await Patient.findByIdAndDelete(req.params.id);
       if (!patient) {
         return res

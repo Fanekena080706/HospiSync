@@ -1,45 +1,182 @@
 .sidebar {
-    width: 260px;
-    background-color: #ffffff;
-    border-right: 1px solid #e5e7eb;
+    width: 280px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+    border-right: 1px solid rgba(229, 231, 235, 0.5);
     padding: 1.5rem 1.25rem;
     display: flex;
     flex-direction: column;
-    
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f3f4f6;
+    margin-bottom: 1.5rem;
 }
 
 .sidebar-logo {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #1e40af;
-  margin-bottom: 0.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
-.sidebar-subtitle {
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  color: #9ca3af;
-  margin-bottom: 2rem;
+/* .logo-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+} */
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-main {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #1f2937;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.logo-main span {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.sidebar-menu {
+    flex: 1;
+    margin-top: 0.5rem;
+}
+
+.menu-section {
+    margin-bottom: 1.5rem;
+}
+
+.menu-section-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+    font-weight: 700;
+    padding: 0 0.9rem;
+    margin-bottom: 0.5rem;
 }
 
 .menu-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.7rem 0.9rem;
-  border-radius: 0.5rem;
-  color: #4b5563;
-  text-decoration: none;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-  transition: background-color 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.75rem;
+    color: #6b7280;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-bottom: 0.2rem;
+    position: relative;
 }
 
 .menu-item:hover {
-  background-color: #f3f4f6;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+    color: #4b5563;
+    transform: translateX(4px);
 }
 
 .menu-item.active {
-  background-color: #dbeafe;
-  color: #1e40af;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    color: #667eea;
+    font-weight: 600;
+}
+
+.menu-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 24px;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    border-radius: 0 4px 4px 0;
+}
+
+.menu-item .menu-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.menu-item .menu-badge {
+    margin-left: auto;
+    background: #ef4444;
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1rem;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 2px solid #f3f4f6;
+}
+
+.footer-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.75rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.footer-item:hover {
+    background: #f3f4f6;
+    color: #ef4444;
+}
+
+/* Scrollbar personnalisée */
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
 }

@@ -1,220 +1,224 @@
+import { useState } from "react";
+import "./AddPatients.css";
+import { X, User, AlertCircle } from "lucide-react";
+import { patientService } from "../../services/patient.Service";
 
-import { useState,useEffect } from "react";
-import "./AddPatiens.css";
+export default function AddPatients({ patient, onClose, onSuccess }) {
+  const [nom, setNom] = useState(patient?.nom || "");
+  const [prenom, setPrenom] = useState(patient?.prenom || "");
+  const [age, setAge] = useState(patient?.age || 0);
+  const [sexe, setSexe] = useState(patient?.sexe || "");
+  const [groupeSanguin, setGroupeSanguin] = useState(patient?.groupe_sanguin || "");
+  const [phone, setPhone] = useState(patient?.telephone || "");
+  const [adresse, setAdresse] = useState(patient?.adresse || "");
+  const [dateNaissance, setDateNaissance] = useState(
+    patient?.date_naissance ? patient.date_naissance.split('T')[0] : ""
+  );
+  const [infos, setInfos] = useState(patient?.informations_medicales || "");
+  const [niveau, setNiveau] = useState(patient?.niveau_urgence || "");
+  const [error, setError] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
-// fonction izay chiffre iany no alaina eto 
-function cleanDigits(value){
-    return value.replace(/\D/g, '');
-}
-// format anle numero
-function formatPhoneNumber(value){
-    let chiffre = cleanDigits(value);
+    const data = {
+      nom: nom.trim(),
+      prenom: prenom.trim(),
+      sexe: sexe,
+      age: parseInt(age),
+      niveau_urgence: parseInt(niveau),
+    };
 
-    chiffre = chiffre.slice(0,10);
+    if (phone) data.telephone = phone.trim();
+    if (adresse) data.adresse = adresse.trim();
+    if (groupeSanguin) data.groupe_sanguin = groupeSanguin;
+    if (infos) data.informations_medicales = infos.trim();
+    if (dateNaissance) data.date_naissance = dateNaissance;
 
-    const parts = [];
-    if(chiffre.length >0) parts.push(chiffre.slice(0,3));
-    if(chiffre.length >3) parts.push(chiffre.slice(3,5));
-    if(chiffre.length >5) parts.push(chiffre.slice(5,8));
-    if(chiffre.length >8) parts.push(chiffre.slice(8,10));
-    return parts.join(" ");
-
-}
- function isvalidNumber(value){
-    const chiffre = cleanDigits(value);
-     return /^0(34|38|33|32|37)\d{7}$/.test(chiffre);
- }
-
-export default function AddPatients({onClose, onPatientAdded,existingPhone,onPatientUpdated,patientToEdit}) {
-    const [nom, setNom] = useState("");
-    const [Prenom, setPrenom] = useState("");
-    const [sexe, setSexe] = useState("");
-    const [Groupesanguin, setGroupesanguin] = useState("");
-    const [phone, setPhone] = useState("");
-    const [adresse, setAdresse] = useState("");
-    const [dateNaissance, setDateNaissance] = useState("");
-    const [infos,setInfos] = useState("");
-    const [niveau,setNiveau] = useState("");
-    const [error , setError] = useState("");
-
-    // manao aafichage anle formulaire rehefa misy patient editena
-    useEffect(() =>{
-        if(patientToEdit){
-            setNom(patientToEdit.nom);
-            setPrenom(patientToEdit.Prenom);
-            setSexe(patientToEdit.sexe);
-            setGroupesanguin(patientToEdit.Groupesanguin);
-            setPhone(patientToEdit.phone);
-            setAdresse(patientToEdit.adresse);
-            setInfos(patientToEdit.infos);
-            setNiveau(patientToEdit.niveau);
-        }
-    },[patientToEdit]);
-
-    function handleSubmit(e){
-        e.preventDefault();
-
-        const phoneExisting = existingPhone.some((patient) => patient.phone === phone);
-        if(phoneExisting){
-            setError("Le numéro de téléphone existe déjà pour un autre patient.");
-            return;
-        }
-        // atao mise a jour le donne vaovao anle patients
-        if(patientToEdit){
-            const updatedPatient = {
-                id: patientToEdit.id,
-                nom,
-                Prenom,
-                sexe,
-                Groupesanguin,
-                phone,
-                adresse,
-                dateNaissance,
-                infos,
-                niveau
-            };
-            onPatientUpdated(updatedPatient);
-            onClose();
-            return;
-        }
-        const newPatient = { id:crypto.randomUUID() ,nom, Prenom, sexe, Groupesanguin,phone,adresse,dateNaissance,infos,niveau};
-        onPatientAdded(newPatient);
-        onClose();
+    try {
+      let response;
+      if (patient) {
+        response = await patientService.update(patient._id, data);
+      } else {
+        response = await patientService.create(data);
+      }
+      onSuccess(response.data.data);
+      onClose();
+    } catch (err) {
+      setError(err.response?.data?.message || "Une erreur est survenue.");
     }
-    const handleChangePhone = (e) =>{
-        const formatedPhone = formatPhoneNumber(e.target.value);
-        const chiffre = cleanDigits(formatedPhone);
-        if(!isvalidNumber(formatedPhone) && chiffre.length === 10){
-            setError("Le numéro de téléphone n'est pas valide.");
-        }
-        setPhone(formatedPhone);
-    }
-    
-    return(
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <h2>Ajouter patients</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-row" >
-                        <div className="form-group">
-                            <label >Nom</label>
-                            <input 
-                                type="text" value={nom} 
-                                placeholder="Nom"
-                                onChange={(e) => setNom(e.target.value)} 
-                                required />
-                        </div>
-                        <div className="form-group">
-                            <label >Prenom</label>
-                            <input 
-                                type="text"  
-                                value={Prenom} onChange={(e) => setPrenom(e.target.value)} 
-                                required
-                                placeholder="Prenom"
-                            />
+  };
 
-                        </div>
-                       
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group">
-                             <label >Sexe</label>
-                            <select 
-                                value={sexe}
-                                onChange={(e) => setSexe(e.target.value)}
-                                required
-                            >
-                                <option value="">Sélectionner</option>
-                                <option value="Homme">Homme</option>
-                                <option value="Femme">Femme</option>
-                            </select>
-
-                        </div>
-                        <div className="form-group">
-                            <label >Date de naissance</label>
-                            <input type="date" 
-                            value={dateNaissance} 
-                            onChange={(e) => setDateNaissance(e.target.value)}
-                            max={new Date().toISOString().split("T")[0]} 
-                            />
-                        </div>
-                    </div>
-                   
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label>Adresse</label>
-                            <input 
-                                type="text" 
-                                value={adresse} 
-                                onChange={(e) => setAdresse(e.target.value)} 
-                                required
-                                placeholder="Adresse"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Téléphone</label>
-                            <input 
-                                type="tel"
-                                placeholder="034 12 345 54"
-                                value={phone}
-                                onChange={handleChangePhone}
-                                onBlur={() => {
-                                    if(!isvalidNumber(phone) && phone.length ===10){
-                                        setError("Le numéro de téléphone n'est pas valide.");
-                                    }else{
-                                        setError("");
-                                    }
-                                }}
-                                maxLength={13}
-                                required
-                                
-                            />
-                            {error && <p style={{color:"red", fontWeight:"bold"}}>{error}</p>}
-                        
-                        </div>
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label>Groupe sanguin</label>
-                            <select 
-                                value={Groupesanguin} 
-                                onChange={(e) => setGroupesanguin(e.target.value)} 
-                                required
-                            >
-                                <option value="">Sélectionner</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="AB">AB</option>
-                                <option value="O">O</option>
-                            </select>
-                        </div>
-                        <div className="form-group">
-                            <label>Niveau d'urgence</label>
-                            <select 
-                                name="" id=""
-                                value={niveau} 
-                                onChange={(e) => setNiveau(e.target.value)}
-                                required
-                            >
-                                <option value="">Sélectionner</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="4">5</option>
-                            </select>
-                        </div>
-                    </div>
-                   
-                    <label>Information médicales</label>
-                    <textarea name="" id="" value={infos} placeholder="information medicales..." onChange={(e) => setInfos(e.target.value)} required></textarea>
-                    <div className="modal-actions">
-                        <button type="button" onClick={onClose} className="Annule-Button">Annuler</button>
-                        <button type="submit">Enregistrer</button>
-                    </div>
-                </form>
-            </div>
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <h2>
+            <span className="modal-icon">
+              <User size={18} />
+            </span>
+            {patient ? "Modifier le patient" : "Ajouter un patient"}
+          </h2>
+          <button className="modal-close-btn" onClick={onClose}>
+            <X size={20} />
+          </button>
         </div>
-    )
+
+        {error && (
+          <div className="form-error">
+            <AlertCircle size={16} />
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          <div className="form-row">
+            <div className="form-group">
+              <label>
+                Nom <span className="required">*</span>
+              </label>
+              <input
+                type="text"
+                value={nom}
+                placeholder="Nom"
+                onChange={(e) => setNom(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>
+                Prénom <span className="required">*</span>
+              </label>
+              <input
+                type="text"
+                value={prenom}
+                placeholder="Prénom"
+                onChange={(e) => setPrenom(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label>
+                Sexe <span className="required">*</span>
+              </label>
+              <select
+                value={sexe}
+                onChange={(e) => setSexe(e.target.value)}
+                required
+              >
+                <option value="">Sélectionner</option>
+                <option value="Masculin">Masculin</option>
+                <option value="Féminin">Féminin</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Date de naissance</label>
+              <input
+                type="date"
+                value={dateNaissance}
+                onChange={(e) => setDateNaissance(e.target.value)}
+                max={new Date().toISOString().split("T")[0]}
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label>
+                Âge <span className="required">*</span>
+              </label>
+              <input
+                type="number"
+                value={age}
+                placeholder="Âge"
+                onChange={(e) => setAge(e.target.value)}
+                required
+                min={0}
+              />
+            </div>
+            <div className="form-group">
+              <label>Téléphone</label>
+              <input
+                type="tel"
+                placeholder="034 12 345 67"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                maxLength={13}
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label>Groupe sanguin</label>
+              <select
+                value={groupeSanguin}
+                onChange={(e) => setGroupeSanguin(e.target.value)}
+              >
+                <option value="">Sélectionner</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>
+                Niveau d'urgence <span className="required">*</span>
+              </label>
+              <select
+                value={niveau}
+                onChange={(e) => setNiveau(e.target.value)}
+                required
+              >
+                <option value="">Sélectionner</option>
+                <option value="1">1 - Critique</option>
+                <option value="2">2 - Urgent</option>
+                <option value="3">3 - Modéré</option>
+                <option value="4">4 - Mineur</option>
+                <option value="5">5 - Non urgent</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Adresse</label>
+            <input
+              type="text"
+              value={adresse}
+              placeholder="Adresse complète"
+              onChange={(e) => setAdresse(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Informations médicales</label>
+            <textarea
+              value={infos}
+              placeholder="Antécédents, allergies, traitements en cours..."
+              onChange={(e) => setInfos(e.target.value)}
+              rows="3"
+            />
+          </div>
+
+          <div className="modal-actions">
+            <button type="button" onClick={onClose}>
+              Annuler
+            </button>
+            <button type="submit">
+              {patient ? "Modifier" : "Ajouter"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
