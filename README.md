@@ -96,9 +96,6 @@ Architecture : **MVC + REST API**
 ```bash
 git clone https://github.com/Fanekena080706/HospiSync.git
 
-Manohy Fanekena RANDRIANANTENAINA
-Software Engineering Student
-Full Stack MERN Developer
 ```
 
 ### 2. Installer les dépendances
@@ -156,6 +153,16 @@ npm start
 
 <img width="1898" height="928" alt="alert" src="https://github.com/user-attachments/assets/a83a3e5d-8797-4024-b0f7-915c7bf2d8fb" />
 
+
+---
+
+## Auteur
+
+Manohy Fanekena RANDRIANANTENAINA
+
+Software Engineering Student
+
+Full Stack MERN Developer
 
 ---
 
