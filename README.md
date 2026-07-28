@@ -140,7 +140,18 @@ npm start
 
 ## 📸 Captures d'écran
 
-À compléter avec des captures de l'application.
+<img width="1881" height="930" alt="dash" src="https://github.com/user-attachments/assets/4c08c576-7c56-4512-a4f6-d8c75b971667" />
+
+<img width="1897" height="972" alt="patient" src="https://github.com/user-attachments/assets/15a4412d-e71f-4367-90fc-d34918423953" />
+
+<img width="1887" height="937" alt="medicament" src="https://github.com/user-attachments/assets/7087c6e1-cc32-4e12-bf9c-a1a8cb87e83b" />
+
+<img width="1877" height="957" alt="mouvement" src="https://github.com/user-attachments/assets/289d5875-08ba-44b2-a0ea-0154ad0b448d" />
+
+<img width="1907" height="935" alt="admission" src="https://github.com/user-attachments/assets/06f6f4b4-7533-4049-abf2-97de5fef20f2" />
+
+<img width="1898" height="928" alt="alert" src="https://github.com/user-attachments/assets/a83a3e5d-8797-4024-b0f7-915c7bf2d8fb" />
+
 
 ---
 
@@ -156,7 +167,24 @@ npm start
 
 ## 👥 Équipe
 
-Projet réalisé dans le cadre d'un projet universitaire.
+Projet réalisé dans le cadre d'un mini-projet universitaire.
+
+Matière: MVC
+
+annee universitaire: 2025 - 2026
+
+IGGLIA3 : 
+
+	RASOLOMANANA Andry Nomenjanahary Liantsoa 
+	RAKOTOMALALA Manitrela Harivelo
+	RANDRIANJAFY Jimmy Mamy Mickael
+	RAZAFINDRATSIMA Ny Tsanta Fiorenana Fehizoro
+	RAZAFINDRAIBE Nirintsoa Faneva
+	RAMBONIARISOA Mathieu
+	SETH Maholitiana Seann
+	RATOVONDRIAKA Herihasitahina
+	RANDRIANANTENAINA Manohy Fanekena
+	ANDRIATOLOJANAHARY Misandratrarivo Tiavina
 
 ---
 
