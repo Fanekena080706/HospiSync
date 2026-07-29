@@ -1,4 +1,4 @@
-# 🏥 HospiSync
+# HospiSync
 
 HospiSync est une application web de gestion hospitalière développée avec la stack MERN (MongoDB, Express.js, React.js et Node.js).
 
@@ -6,37 +6,37 @@ L'application permet de gérer les patients, les salles d'hospitalisation, les a
 
 ---
 
-## 📌 Fonctionnalités
+## Fonctionnalités
 
-### 👨‍⚕️ Gestion des patients
+### Gestion des patients
 
 - Ajouter un patient
 - Modifier les informations d'un patient
 - Supprimer un patient
 - Recherche rapide
 
-### 🏥 Gestion des salles
+### Gestion des salles
 
 - Création des salles
 - Modification des salles
 - Suivi de la capacité
 - Gestion des lits disponibles
 
-### 📋 Gestion des admissions
+### Gestion des admissions
 
 - Admission d'un patient
 - Affectation à une salle disponible
 - Mise à jour du statut
 - Historique des admissions
 
-### 💊 Gestion des médicaments
+### Gestion des médicaments
 
 - Ajout des médicaments
 - Modification
 - Suppression (si aucun mouvement n'existe)
 - Suivi des quantités
 
-### 📦 Gestion du stock
+### Gestion du stock
 
 - Entrée de stock
 - Sortie de stock
@@ -45,7 +45,7 @@ L'application permet de gérer les patients, les salles d'hospitalisation, les a
 
 ---
 
-## 🚀 Technologies utilisées
+## Technologies utilisées
 
 ### Frontend
 
@@ -64,7 +64,7 @@ L'application permet de gérer les patients, les salles d'hospitalisation, les a
 
 ---
 
-## 📂 Architecture
+## Architecture
 
 ```
 HospiSync
@@ -89,7 +89,7 @@ Architecture : **MVC + REST API**
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ### 1. Cloner le projet
 
@@ -139,7 +139,7 @@ npm start
 
 ---
 
-## 📸 Captures d'écran
+## Captures d'écran
 
 <img width="1881" height="930" alt="dash" src="https://github.com/user-attachments/assets/4c08c576-7c56-4512-a4f6-d8c75b971667" />
 
@@ -166,7 +166,7 @@ Full Stack MERN Developer
 
 ---
 
-## 🔮 Améliorations futures
+## Améliorations futures
 
 - Authentification JWT
 - Gestion des rôles
@@ -176,7 +176,7 @@ Full Stack MERN Developer
 
 ---
 
-## 👥 Équipe
+## Équipe
 
 Projet réalisé dans le cadre d'un mini-projet universitaire.
 
@@ -199,6 +199,6 @@ IGGLIA3 :
 
 ---
 
-## 📄 Licence
+## Licence
 
 Ce projet est distribué sous la licence MIT.
